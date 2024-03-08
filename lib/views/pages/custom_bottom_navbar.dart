@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nike_app/utils/app_colors.dart';
+import 'package:nike_app/view_models/home_cubit/home_cubit.dart';
 import 'package:nike_app/views/pages/favorites_page.dart';
 import 'package:nike_app/views/pages/home_page.dart';
 import 'package:nike_app/views/pages/notfication_page.dart';
@@ -24,7 +26,14 @@ class _CustomBottomNavbarState extends State<CustomBottomNavbar> {
 
   List<Widget> _buildScreens() {
     return [
-      const HomePage(),
+      BlocProvider(
+        create: (context) {
+          final cubit = HomeCubit();
+          cubit.getHomeData();
+          return cubit;
+        },
+        child: const HomePage(),
+      ),
       const FavoritesPage(),
       const NotficationsPage(),
       const ProfilePage(),
