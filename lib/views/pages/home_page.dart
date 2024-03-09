@@ -38,7 +38,7 @@ class HomePage extends StatelessWidget {
         ),
         title: Row(
           children: [
-            SizedBox(
+            const SizedBox(
               width: 0,
             ),
             Image.asset(
@@ -52,11 +52,10 @@ class HomePage extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 shape: BoxShape.rectangle,
-                color: Colors
-                    .transparent, // يمكنك تعيين اللون الذي تريده أو استخدام Colors.transparent لمربع شفاف
+                color: Colors.transparent,
                 borderRadius: BorderRadius.circular(8.0),
                 border: Border.all(
-                  color: Colors.grey, // لون الحدود الخارجية
+                  color: Colors.grey,
                 ),
               ),
               padding: const EdgeInsets.all(8.0),
@@ -80,7 +79,65 @@ class HomePage extends StatelessWidget {
               child: CircularProgressIndicator.adaptive(),
             );
           } else if (state is HomeCubitLoaded) {
-            return CustomCarouselIndicator(announcements: state.products);
+            return Column(
+              children: [
+                CustomCarouselIndicator(announcements: state.products),
+                const SizedBox(
+                  height: 16,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: SizedBox(
+                    height: 50,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: state.types.length,
+                      itemBuilder: (context, index) {
+                        return Row(
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                onPrimary: Colors.black,
+                                surfaceTintColor: Colors.transparent,
+                                shadowColor: Colors.transparent,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(25),
+                                ),
+                              ),
+                              child: Container(
+                                height: 36,
+                                width: 60,
+                                decoration: BoxDecoration(
+                                  color: Colors.transparent,
+                                  borderRadius: BorderRadius.circular(25),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    state.types[index].type,
+                                    style: const TextStyle(
+                                      color: Color.fromARGB(255, 120, 118, 118),
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 4,
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+              ],
+            );
           } else {
             return const Center(
               child: Text('Error'),

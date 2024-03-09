@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nike_app/models/announcement_model.dart';
+import 'package:nike_app/models/types.dart';
 
 part 'home_state.dart';
 
@@ -10,7 +11,8 @@ class HomeCubit extends Cubit<HomeState> {
     try {
       await Future.delayed(const Duration(seconds: 2));
       final products = dummyAnnouncements;
-      emit(HomeCubitLoaded(products));
+      final types = typesIcons;
+      emit(HomeCubitLoaded(products, types));
     } catch (e) {
       emit(HomeCubitError(e.toString()));
     }
