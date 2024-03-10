@@ -100,7 +100,7 @@ class HomePage extends StatelessWidget {
                               ElevatedButton(
                                 onPressed: () {},
                                 style: ElevatedButton.styleFrom(
-                                  onPrimary: Colors.black,
+                                  foregroundColor: Colors.black,
                                   surfaceTintColor: Colors.transparent,
                                   shadowColor: Colors.transparent,
                                   shape: RoundedRectangleBorder(

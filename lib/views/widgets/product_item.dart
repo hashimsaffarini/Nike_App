@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:nike_app/models/product_model.dart';
 import 'package:nike_app/utils/app_colors.dart';
 
@@ -28,27 +29,36 @@ class ProductItems extends StatelessWidget {
               children: [
                 Image.asset(
                   product.imgUrl,
-                  height: 150,
+                  height: 135,
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      product.title,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 17),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          product.title,
+                          style: GoogleFonts.acme(
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 1,
+                        ),
+                        Text(
+                          '\$${product.price}',
+                          style: GoogleFonts.aBeeZee(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.black,
+                          ),
+                        ),
+                      ],
                     ),
-                    Text(
-                      '${product.price}',
-                      style: const TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ],
             ),
