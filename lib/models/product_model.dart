@@ -17,14 +17,14 @@ class ProductsModel {
 List<ProductsModel> dummyProducts = [
   ProductsModel(
     id: '1',
-    imgUrl: 'https://i.ebayimg.com/images/g/X9wAAOSwWJlk2a4E/s-l1600.jpg',
+    imgUrl: 'assets/images/15947562_30161559_1000-removebg-preview 1.png',
     price: 20.99,
     title: 'Running',
     description: 'Nike Air Max 90',
   ),
   ProductsModel(
     id: '2',
-    imgUrl: 'https://i.ytimg.com/vi/jP4im6w74GU/maxresdefault.jpg',
+    imgUrl: 'assets/images/Yellow Shoe.png',
     price: 25.99,
     title: 'Running',
     description: 'Nike React Presto',
@@ -32,7 +32,7 @@ List<ProductsModel> dummyProducts = [
   ProductsModel(
     id: '3',
     imgUrl:
-        'https://static.nike.com/a/images/t_prod/w_1920,c_limit/9920e151-b490-475e-ab0d-04e022375446/pdp.jpg',
+        'assets/images/toppng.png',
     price: 40.99,
     title: 'Running',
     description: 'Nike Air Max 270 React ENG',
@@ -40,7 +40,7 @@ List<ProductsModel> dummyProducts = [
   ProductsModel(
     id: '4',
     imgUrl:
-        'https://cdn.shopify.com/s/files/1/0214/7974/files/D7N_0579_2048x2048.jpg?v=1539307179',
+        'assets/images/Shoe 1.png',
     price: 19.99,
     title: 'Running',
     description: 'Nike Air Max 99',

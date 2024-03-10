@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nike_app/utils/app_colors.dart';
 import 'package:nike_app/view_models/home_cubit/home_cubit.dart';
 import 'package:nike_app/views/widgets/custom_carousel_indicatior.dart';
+import 'package:nike_app/views/widgets/product_item.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -79,64 +80,84 @@ class HomePage extends StatelessWidget {
               child: CircularProgressIndicator.adaptive(),
             );
           } else if (state is HomeCubitLoaded) {
-            return Column(
-              children: [
-                CustomCarouselIndicator(announcements: state.products),
-                const SizedBox(
-                  height: 16,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: SizedBox(
-                    height: 50,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: state.types.length,
-                      itemBuilder: (context, index) {
-                        return Row(
-                          children: [
-                            ElevatedButton(
-                              onPressed: () {},
-                              style: ElevatedButton.styleFrom(
-                                onPrimary: Colors.black,
-                                surfaceTintColor: Colors.transparent,
-                                shadowColor: Colors.transparent,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(25),
+            return SingleChildScrollView(
+              child: Column(
+                children: [
+                  CustomCarouselIndicator(announcements: state.announcements),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: SizedBox(
+                      height: 50,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: state.types.length,
+                        itemBuilder: (context, index) {
+                          return Row(
+                            children: [
+                              ElevatedButton(
+                                onPressed: () {},
+                                style: ElevatedButton.styleFrom(
+                                  onPrimary: Colors.black,
+                                  surfaceTintColor: Colors.transparent,
+                                  shadowColor: Colors.transparent,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(25),
+                                  ),
                                 ),
-                              ),
-                              child: Container(
-                                height: 36,
-                                width: 60,
-                                decoration: BoxDecoration(
-                                  color: Colors.transparent,
-                                  borderRadius: BorderRadius.circular(25),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    state.types[index].type,
-                                    style: const TextStyle(
-                                      color: Color.fromARGB(255, 120, 118, 118),
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold,
+                                child: Container(
+                                  height: 36,
+                                  width: 60,
+                                  decoration: BoxDecoration(
+                                    color: Colors.transparent,
+                                    borderRadius: BorderRadius.circular(25),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      state.types[index].type,
+                                      style: const TextStyle(
+                                        color:
+                                            Color.fromARGB(255, 120, 118, 118),
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                            const SizedBox(
-                              width: 4,
-                            ),
-                          ],
-                        );
-                      },
+                              const SizedBox(
+                                width: 4,
+                              ),
+                            ],
+                          );
+                        },
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-              ],
+                  const SizedBox(
+                    height: 18,
+                  ),
+                  GridView.builder(
+                    itemCount: state.products.length,
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 18,
+                    ),
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        child: ProductItems(
+                          product: state.products[index],
+                        ),
+                      );
+                    },
+                  )
+                ],
+              ),
             );
           } else {
             return const Center(
