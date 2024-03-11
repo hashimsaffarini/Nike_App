@@ -83,7 +83,9 @@ class HomePage extends StatelessWidget {
             return SingleChildScrollView(
               child: Column(
                 children: [
-                  CustomCarouselIndicator(announcements: state.announcements),
+                  CustomCarouselIndicator(
+                    announcements: state.announcements,
+                  ),
                   const SizedBox(
                     height: 8,
                   ),
@@ -172,7 +174,6 @@ class HomePage extends StatelessWidget {
                         mainAxisSpacing: 25,
                       ),
                       itemBuilder: (context, index) {
-                        debugPrint('HomePage');
                         return InkWell(
                           child: ProductItems(
                             product: state.products[index],
