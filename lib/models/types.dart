@@ -1,18 +1,18 @@
-class TypesIcons {
+class Categories {
   String id;
   String type;
-  TypesIcons({
+  Categories({
     required this.id,
     required this.type,
   });
 }
 
-List<TypesIcons> typesIcons = [
-  TypesIcons(type: 'All', id: '0'),
-  TypesIcons(type: 'Running', id: '1'),
-  TypesIcons(type: 'Sneakers', id: '2'),
-  TypesIcons(type: 'Boots', id: '3'),
-  TypesIcons(type: 'Formals', id: '4'),
-  TypesIcons(type: 'Sandals', id: '5'),
-  TypesIcons(type: 'Slippers', id: '6'),
+List<Categories> dummyCategories = [
+  Categories(type: 'All', id: '0'),
+  Categories(type: 'Running', id: '1'),
+  Categories(type: 'Football', id: '2'),
+  Categories(type: 'Jordan', id: '3'),
+  Categories(type: 'Formals', id: '4'),
+  Categories(type: 'Sandals', id: '5'),
+  Categories(type: 'Slippers', id: '6'),
 ];

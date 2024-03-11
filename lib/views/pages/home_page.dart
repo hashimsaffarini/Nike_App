@@ -7,9 +7,9 @@ import 'package:nike_app/views/widgets/product_item.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
-
   @override
   Widget build(BuildContext context) {
+    final cubit = BlocProvider.of<HomeCubit>(context);
     return Scaffold(
       appBar: AppBar(
         leading: Row(
@@ -69,7 +69,7 @@ class HomePage extends StatelessWidget {
         ],
       ),
       body: BlocBuilder<HomeCubit, HomeState>(
-        bloc: BlocProvider.of<HomeCubit>(context),
+        bloc: cubit,
         buildWhen: (previous, current) =>
             current is HomeCubitLoaded ||
             current is HomeCubitLoading ||
@@ -95,11 +95,26 @@ class HomePage extends StatelessWidget {
                         scrollDirection: Axis.horizontal,
                         itemCount: state.types.length,
                         itemBuilder: (context, index) {
+                          final category = state.types[index];
                           return Row(
                             children: [
                               ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  if (cubit.selectedId != null &&
+                                          cubit.selectedId == category.id ||
+                                      category.id == '0') {
+                                    cubit.getAllData();
+                                  } else {
+                                    cubit.filterByCategory(category.id);
+                                  }
+                                },
                                 style: ElevatedButton.styleFrom(
+                                  backgroundColor: cubit.selectedId != null &&
+                                              cubit.selectedId == category.id ||
+                                          cubit.selectedId == null &&
+                                              category.id == '0'
+                                      ? Colors.black
+                                      : Colors.transparent,
                                   foregroundColor: Colors.black,
                                   surfaceTintColor: Colors.transparent,
                                   shadowColor: Colors.transparent,
@@ -109,7 +124,7 @@ class HomePage extends StatelessWidget {
                                 ),
                                 child: Container(
                                   height: 36,
-                                  width: 60,
+                                  width: 56,
                                   decoration: BoxDecoration(
                                     color: Colors.transparent,
                                     borderRadius: BorderRadius.circular(25),
@@ -117,10 +132,16 @@ class HomePage extends StatelessWidget {
                                   child: Center(
                                     child: Text(
                                       state.types[index].type,
-                                      style: const TextStyle(
-                                        color:
-                                            Color.fromARGB(255, 120, 118, 118),
-                                        fontSize: 14,
+                                      style: TextStyle(
+                                        color: cubit.selectedId != null &&
+                                                    cubit.selectedId ==
+                                                        category.id ||
+                                                cubit.selectedId == null &&
+                                                    category.id == '0'
+                                            ? Colors.white
+                                            : const Color.fromARGB(
+                                                255, 120, 118, 118),
+                                        fontSize: 13,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
@@ -139,22 +160,26 @@ class HomePage extends StatelessWidget {
                   const SizedBox(
                     height: 18,
                   ),
-                  GridView.builder(
-                    itemCount: state.products.length,
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      mainAxisSpacing: 18,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: GridView.builder(
+                      itemCount: state.products.length,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 25,
+                      ),
+                      itemBuilder: (context, index) {
+                        debugPrint('HomePage');
+                        return InkWell(
+                          child: ProductItems(
+                            product: state.products[index],
+                          ),
+                        );
+                      },
                     ),
-                    itemBuilder: (context, index) {
-                      return InkWell(
-                        child: ProductItems(
-                          product: state.products[index],
-                        ),
-                      );
-                    },
                   )
                 ],
               ),

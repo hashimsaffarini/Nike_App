@@ -8,7 +8,7 @@ final class HomeCubitLoading extends HomeState {}
 
 final class HomeCubitLoaded extends HomeState {
   final List<AnnouncementModel> announcements;
-  final List<TypesIcons> types;
+  final List<Categories> types;
   final List<ProductsModel> products;
   HomeCubitLoaded(this.announcements, this.types, this.products);
 }
