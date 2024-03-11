@@ -1,4 +1,4 @@
-## Nike App
+# Nike App
 
 # Description:
 The Nike App is a mobile application built using the Flutter framework for creating beautiful and responsive cross-platform apps. The app serves as a showcase for Nike products, providing users with a seamless shopping experience and access to various features.
