@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nike_app/utils/app_colors.dart';
+import 'package:nike_app/utils/route/app_routes.dart';
 import 'package:nike_app/view_models/home_cubit/home_cubit.dart';
 import 'package:nike_app/views/widgets/custom_carousel_indicatior.dart';
 import 'package:nike_app/views/widgets/product_item.dart';
@@ -175,6 +176,14 @@ class HomePage extends StatelessWidget {
                       ),
                       itemBuilder: (context, index) {
                         return InkWell(
+                          highlightColor: Colors.transparent,
+                          splashColor: Colors.transparent,
+                          onTap: () =>
+                              Navigator.of(context, rootNavigator: true)
+                                  .pushNamed(
+                            AppRoutes.productDetails,
+                            arguments: state.products[index],
+                          ),
                           child: ProductItems(
                             product: state.products[index],
                           ),
