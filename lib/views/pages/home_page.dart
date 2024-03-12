@@ -55,7 +55,7 @@ class HomePage extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: BoxShape.rectangle,
                 color: Colors.transparent,
-                borderRadius: BorderRadius.circular(8.0),
+                borderRadius: BorderRadius.circular(10.0),
                 border: Border.all(
                   color: Colors.grey,
                 ),

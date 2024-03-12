@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nike_app/models/product_model.dart';
 import 'package:nike_app/utils/route/app_routes.dart';
 import 'package:nike_app/views/pages/custom_bottom_navbar.dart';
 import 'package:nike_app/views/pages/product_details_page.dart';
@@ -10,9 +11,11 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const CustomBottomNavbar(),
         );
-        case AppRoutes.productDetails:
+      case AppRoutes.productDetails:
         return MaterialPageRoute(
-          builder: (_) => const ProductDetailsPage(),
+          builder: (_) => ProductDetailsPage(
+            product: settings.arguments as ProductsModel,
+          ),
         );
       default:
         return MaterialPageRoute(
