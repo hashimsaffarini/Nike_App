@@ -34,12 +34,14 @@ class ProductsModel {
       price: map['price'] ?? 0.0,
       title: map['title'] ?? '',
       description: map['description'] ?? '',
-      category:
-          ProductCategories.fromMap(map['category'] as Map<String, dynamic>),
+      category: map['category'] != null
+          ? ProductCategories.fromMap(map['category'] as Map<String, dynamic>)
+          : ProductCategories.fromMap({}),
     );
   }
 }
 
+List<ProductsModel> dummyFav = [];
 List<ProductsModel> dummyProducts = [
   ProductsModel(
     id: 'ey5T4jGMSn9xQNDFNBvf',

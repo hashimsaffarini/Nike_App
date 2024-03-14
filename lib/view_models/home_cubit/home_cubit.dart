@@ -2,12 +2,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nike_app/models/announcement_model.dart';
 import 'package:nike_app/models/product_model.dart';
 import 'package:nike_app/models/product_categories.dart';
+import 'package:nike_app/services/firestore_services.dart';
 import 'package:nike_app/services/home_services.dart';
+import 'package:nike_app/utils/route/api_paths.dart';
 
 part 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   final homeServices = HomeServicesImpl();
+  final firestoreService = FirestoreService.instance;
   String? selectedId;
 
   HomeCubit() : super(HomeCubitInitial());
@@ -41,6 +44,30 @@ class HomeCubit extends Cubit<HomeState> {
   Future<void> getAllData() async {
     selectedId = null;
     emit(HomeCubitLoaded(dummyAnnouncements, dummyCategories, dummyProducts));
+  }
+
+  Future<void> changeFavorites(String id) async {
+    final favProducts = await homeServices.getFavProducts();
+    final product = dummyProducts.firstWhere((element) => element.id == id);
+
+    final index = favProducts.indexWhere((element) => element.id == id);
+    if (index != -1) {
+      firestoreService.deleteData(path: ApiPaths.favItem(id));
+      favProducts.removeAt(index);
+    } else {
+      firestoreService.setData(
+        path: ApiPaths.favItem(id),
+        data: product.toMap(),
+      );
+      favProducts.add(product);
+    }
+
+    emit(HomeCubitLoadedFav(favProducts));
+  }
+
+  Future<void> getFav() async {
+    final favProducts = await homeServices.getFavProducts();
+    emit(HomeCubitLoadedFav(favProducts));
   }
 
   // Future<void> add() async {

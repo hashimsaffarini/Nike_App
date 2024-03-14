@@ -11,6 +11,7 @@ abstract class HomeServices {
   Future<void> addProducts(ProductsModel product);
   Future<void> addAnnouncments(AnnouncementModel product);
   Future<void> addCategories(ProductCategories product);
+  Future<List<ProductsModel>> getFavProducts();
 }
 
 class HomeServicesImpl implements HomeServices {
@@ -58,5 +59,15 @@ class HomeServicesImpl implements HomeServices {
       await firestoreService.setData(
         path: ApiPaths.categoriesItem(product.id),
         data: product.toMap(),
+      );
+
+  @override
+  Future<List<ProductsModel>> getFavProducts() async =>
+      await firestoreService.getCollection<ProductsModel>(
+        path: ApiPaths.favProducts(),
+        builder: (data, documentId) => ProductsModel.fromMap(
+          data,
+          documentId,
+        ),
       );
 }

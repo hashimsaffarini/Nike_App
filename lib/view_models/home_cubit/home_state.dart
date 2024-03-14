@@ -17,3 +17,8 @@ final class HomeCubitError extends HomeState {
   final String message;
   HomeCubitError(this.message);
 }
+
+final class HomeCubitLoadedFav extends HomeState {
+  final List<ProductsModel> favProducts;
+  HomeCubitLoadedFav(this.favProducts);
+}
